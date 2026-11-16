@@ -17,4 +17,8 @@ kubectl apply -f .infrastructure/app/deployment.yml
 
 # Install Ingress Controller
 kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/main/deploy/static/provider/kind/deploy.yaml
-# kubectl apply -f .infrastructure/ingress/ingress.yml
+kubectl -n ingress-nginx rollout status deployment/ingress-nginx-controller --timeout=180s
+until kubectl apply -f .infrastructure/ingress/ingress.yml; do
+  echo "Waiting for ingress-nginx admission webhook..."
+  sleep 5
+done
