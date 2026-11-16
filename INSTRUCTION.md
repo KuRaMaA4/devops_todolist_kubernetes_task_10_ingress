@@ -30,6 +30,6 @@ Open http://localhost in the browser → the ToDo app is shown.
 Open DevTools → Network/Console → reload: there must be no 404 requests.
 
 ## Ingress details
-- File: `.infrastructure/ingress/ingress.yml`
+- File: `infrastructure/ingress/ingress.yml`
 - 1 HTTP rule, 1 path-based rule: `path: /(.*)`, `pathType: ImplementationSpecific`
 - `nginx.ingress.kubernetes.io/use-regex: "true"` + `rewrite-target: /$1` — the captured path is forwarded to `todoapp-service:80` unchanged.
